@@ -17,9 +17,18 @@ body {
 }
 
 .wrapper {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(4, 1fr);
 }
 .main {
 	&__container {
+		grid-column: 2;
+		grid-row: 2;
+		text-align: left;
+		min-width: 500px;
 	}
 }
 .start {
@@ -27,11 +36,121 @@ body {
 	}
 
 	&__title {
+		font-size: 44px;
+		margin-bottom: 20px;
 	}
-
+	&__form {
+		display: flex;
+		flex-direction: column;
+		label {
+			font-size: 20px;
+		}
+		select {
+			font-size: 16px;
+			cursor: pointer;
+			option {
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 5px;
+			}
+		}
+	}
 	&__choose-topic {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		margin-bottom: 25px;
 	}
 
 	&__choose-difficulty {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin-bottom: 25px;
+	}
+}
+
+#start__button {
+	background-color: #52bab3;
+	display: inline-block;
+	color: #ffffff;
+	font-size: 18px;
+	padding: 15px 40px;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+	border-radius: 5px;
+	&:hover {
+		background-color: #428580;
+	}
+}
+
+.quiz {
+	&__div {
+		max-width: 500px;
+	}
+
+	&__title {
+		font-size: 34px;
+		margin-bottom: 20px;
+	}
+
+	&__question {
+		margin-bottom: 20px;
+	}
+
+	&__answer-form {
+		margin-bottom: 20px;
+		font-style: italic;
+	}
+
+	&__answer {
+		&:not(:last-child) {
+			margin-bottom: 5px;
+		}
+	}
+	button {
+		background-color: #52bab3;
+		display: inline-block;
+		padding: 15px 40px;
+		color: #ffffff;
+		font-size: 18px;
+		text-align: center;
+		cursor: pointer;
+		transition: all 0.3s ease 0s;
+		border-radius: 5px;
+		&:hover {
+			background-color: #428580;
+		}
+	}
+}
+.game-result-div {
+	display: flex;
+	flex-direction: column;
+}
+.game-result {
+	font-size: 28px;
+	margin-bottom: 20px;
+	text-align: center;
+	span {
+		font-size: 34px;
+		color: #52bab3;
+		font-weight: 700;
+	}
+}
+
+#start-again-button {
+	align-self: center;
+	background-color: #52bab3;
+	display: inline-block;
+	padding: 15px 40px;
+	color: #ffffff;
+	font-size: 18px;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+	border-radius: 5px;
+	&:hover {
+		background-color: #428580;
 	}
 }

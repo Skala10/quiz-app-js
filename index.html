@@ -5,30 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
-    <title>Stopwatch</title>
+    <title>Quiz-app</title>
   </head>
   <body>
     <div class="wrapper">
       <div class="main__container">
+		
+        <!-- <div class="quiz__div quiz">
+          <h2 class="quiz__title"></h2>
+          <p class="quiz__question"></p>
+          <form class="quiz__answer-form">
+            <div class="quiz__answer">
+              <input type="radio" id="html" name="answer" value="HTML" />
+              <label for="html"></label>
+            </div>
+            <div class="quiz__answer">
+              <input type="radio" id="html" name="answer" value="HTML" />
+              <label for="html"></label>
+            </div>
+            <div class="quiz__answer">
+              <input type="radio" id="html" name="answer" value="HTML" />
+              <label for="html"></label>
+            </div>
+            <div class="quiz__answer">
+              <input type="radio" id="html" name="answer" value="HTML" />
+              <label for="html"></label>
+            </div>
+          </form>
+        </div> -->
         <div class="start__div start">
           <h1 class="start__title">Start your quiz</h1>
-          <form>
+          <form class="start__form">
             <div class="start__choose-topic">
               <label for="topic">Choose topic</label>
               <select name="topic" id="topic">
-                <option value="1">Вариант 1</option>
-                <option value="2">Вариант 2</option>
-                <option value="3">Вариант 3</option>
               </select>
             </div>
             <div class="start__choose-difficulty">
-              <label for="theme">Choose difficulty</label>
-              <select name="theme" id="theme">
-                <option value="1">Вариант 1</option>
-                <option value="2">Вариант 2</option>
-                <option value="3">Вариант 3</option>
+              <label for="difficulty">Choose difficulty</label>
+              <select name="difficulty" id="difficulty">
+                <option value="any">Any Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
               </select>
             </div>
+            <button id="start__button">Start quiz</button>
           </form>
         </div>
       </div>

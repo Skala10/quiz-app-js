@@ -1,0 +1,131 @@
+const selectTopic = document.getElementById("topic")
+const startButton = document.getElementById("start__button")
+const mainContainer = document.querySelector(".main__container")
+const selectDifficulty = document.getElementById("difficulty")
+
+let currentQuestionIndex = 0
+let questions = []
+let correctAnswersCount = 0
+
+function getAndRenderChooseDifficultyAPI(url) {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      const dataArray = data.trivia_categories
+      let markup = ""
+      dataArray.forEach((category) => {
+        markup += `<option value="${category.id}">${category.name}</option>`
+      })
+      selectTopic.innerHTML = markup
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+getAndRenderChooseDifficultyAPI("https://opentdb.com/api_category.php")
+
+function removeParentChildren(parent) {
+  parent.innerHTML = ""
+}
+
+function startOfTheQuiz() {
+  startButton.addEventListener("click", startQuiz)
+}
+
+function startQuiz() {
+  const userTopic = selectTopic.value
+  const userDifficulty = selectDifficulty.value
+  removeParentChildren(mainContainer)
+  currentQuestionIndex = 0
+  correctAnswersCount = 0
+  getQuestions(userTopic, userDifficulty)
+}
+
+startOfTheQuiz()
+
+function getQuestions(userTopic, userDifficulty) {
+  let category = ""
+  if (userTopic !== "any") {
+    category = `&category=${userTopic}`
+  }
+
+  let difficulty = ""
+  if (userDifficulty !== "any") {
+    difficulty = `&difficulty=${userDifficulty}`
+  }
+
+  fetch(`https://opentdb.com/api.php?amount=5${category}${difficulty}`)
+    .then((response) => response.json())
+    .then((data) => {
+      questions = data.results
+      showQuestion()
+    })
+}
+
+function showQuestion() {
+  const currentQuestion = questions[currentQuestionIndex]
+
+  let mainMarkup = `
+    <div class="quiz__div quiz">
+      <h2 class="quiz__title">Question ${currentQuestionIndex + 1}</h2>
+      <p class="quiz__question">${currentQuestion.question}</p>
+      <form class="quiz__answer-form">`
+
+  const answers = [
+    ...currentQuestion.incorrect_answers,
+    currentQuestion.correct_answer,
+  ]
+  answers.sort(() => Math.random() - 0.5)
+
+  answers.forEach((answer, index) => {
+    mainMarkup += `
+      <div class="quiz__answer">
+        <input type="radio" id="${index + 1}" name="answer" value="${index}" ${
+      index === 0 ? "checked" : ""
+    } />
+        <label for="${index + 1}">${answer}</label>
+      </div>`
+  })
+
+  mainMarkup += `
+    </form>
+    <button id="next-question-button">Next</button>
+  </div>`
+
+  mainContainer.innerHTML = mainMarkup
+
+  document
+    .getElementById("next-question-button")
+    .addEventListener("click", nextQuestion)
+}
+
+function nextQuestion() {
+  const selectedAnswer = document.querySelector("input[name='answer']:checked")
+  if (selectedAnswer) {
+    const selectedAnswerIndex = parseInt(selectedAnswer.value)
+    const currentQuestion = questions[currentQuestionIndex]
+    const correctAnswerIndex = currentQuestion.incorrect_answers.length
+    if (selectedAnswerIndex === correctAnswerIndex) {
+      correctAnswersCount++
+    }
+  }
+
+  currentQuestionIndex++
+
+  if (currentQuestionIndex < questions.length) {
+    showQuestion()
+  } else {
+    gameResult()
+  }
+}
+
+function gameResult() {
+  removeParentChildren(mainContainer)
+  let gameResult = `<div class="game-result-div">
+  			<h2 class="game-result">Your correct answers is: <span>${correctAnswersCount}</span> </h2>
+			<button id="start-again-button">Start again</button></div>`
+  mainContainer.innerHTML = gameResult
+  const startAgainButton = document.getElementById("start-again-button")
+  startAgainButton.addEventListener("click", () => location.reload())
+}
