@@ -105,10 +105,18 @@ body {
 	}
 
 	&__answer {
+		input {
+			margin-right: 5px;
+		}
+		input,
+		label {
+			cursor: pointer;
+		}
 		&:not(:last-child) {
 			margin-bottom: 5px;
 		}
 	}
+
 	button {
 		background-color: #52bab3;
 		display: inline-block;

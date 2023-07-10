@@ -159,6 +159,13 @@ body {
   margin-bottom: 20px;
   font-style: italic;
 }
+.quiz__answer input {
+  margin-right: 5px;
+}
+.quiz__answer input,
+.quiz__answer label {
+  cursor: pointer;
+}
 .quiz__answer:not(:last-child) {
   margin-bottom: 5px;
 }
