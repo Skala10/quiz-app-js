@@ -4,7 +4,7 @@ My first quiz-app. Start working with API and with controlling page randering.
 
 # Demo: 
 
- https://skala10.github.io/quiz-app/
+ https://skala10.github.io/quiz-app-js/
 
 ## Features
 
